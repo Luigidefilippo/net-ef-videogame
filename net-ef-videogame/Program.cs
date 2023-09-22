@@ -90,13 +90,63 @@
                         }
                             break;
                     case 4:
+                        Console.WriteLine("Enter the id of the game you want to delete from the system");
+                        long videogameid = long.Parse(Console.ReadLine());
+                        try
+                        {
+                            using (VideogameContext db = new VideogameContext())
+                            {
+                                Videogame videogame = db.Videogames.Where(videogame => videogame.VideogameId == videogameid).First();
+
+                                db.Remove(videogame);
+                                db.SaveChanges();
+
+                                Console.WriteLine("Videogame was eliminated to system");
+
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
                         break;
                     case 5:
+                        Console.Write("Enter the name of the software house ");
+                        string nomeHouse = Console.ReadLine();
+
+                        Console.Write("Enter the name of the city of origin of the software house ");
+                        string cittaHouse = Console.ReadLine();
+
+                        Console.Write("Enter the country name of the software house  ");
+                        string paeseHouse = Console.ReadLine();
+
+                        Software_house nuovaSoftwareHouse = new Software_house()
+                        {
+                            Name = nomeHouse,
+                            City = cittaHouse,
+                            Country = paeseHouse
+                        };
+
+                        using (VideogameContext db = new VideogameContext())
+                        {
+                            try
+                            {
+                                db.Add(nuovaSoftwareHouse);
+                                db.SaveChanges();
+
+                                Console.WriteLine("La software house è stata creata");
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                            }
+                        }
                         break;
                     case 6:
                         break;
                 }
+                   
+                }
             }
         }
     }
-}
