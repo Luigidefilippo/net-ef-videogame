@@ -78,7 +78,17 @@
 
                         break;
                     case 3:
-                        break;
+                        Console.WriteLine("Sarch for string ");
+                        string stringa = Console.ReadLine();
+                        using (VideogameContext db = new VideogameContext())
+                        {
+                            List<Videogame> videogame = db.Videogames.Where(videogame => videogame.Name.StartsWith(stringa)).ToList<Videogame>();
+                            foreach ( Videogame videogameFound in videogame )
+                            {
+                                Console.WriteLine($"{videogameFound.Name}");
+                            }
+                        }
+                            break;
                     case 4:
                         break;
                     case 5:
