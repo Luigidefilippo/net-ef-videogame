@@ -21,6 +21,41 @@
                 switch (opzioneSelezionata)
                 {
                     case 1:
+                        Console.WriteLine("Enter a name for the new videogames:");
+                        string name = Console.ReadLine();
+
+                        Console.WriteLine("Enter the Description for the Videogames");
+                        string overview = Console.ReadLine();
+
+                        Console.WriteLine("Enter the realising date ");
+                        DateTime realease_date = DateTime.Parse(Console.ReadLine());
+
+                        Console.WriteLine("Enter the video game software house");
+                        long software_house = long.Parse(Console.ReadLine());
+
+                        Videogame newVideogame = new Videogame()
+                        {
+                            Name = name,
+                            Overview = overview,
+                            Release_date = realease_date,
+                            Software_houseId = software_house
+                        };
+                        
+                        using (VideogameContext db = new VideogameContext())
+                        {
+                            try
+                            {
+                                db.Add(newVideogame);
+                                db.SaveChanges();
+
+                                Console.WriteLine("The videogame was add  ");
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                            }
+                        }
+
                         break;
                     case 2:
                         break;
