@@ -55,9 +55,27 @@
                                 Console.WriteLine(ex.Message);
                             }
                         }
-
                         break;
                     case 2:
+                        Console.WriteLine("Enter the id of the video game to search for");
+                        long gameid = long.Parse(Console.ReadLine());
+
+                        using (VideogameContext db = new VideogameContext())
+                        {
+                            Videogame videogame = db.Videogames.FirstOrDefault(videogame => videogame.VideogameId == gameid); 
+                            if (videogame != null)
+                            {
+                                Console.WriteLine($"Name : {videogame.Name}");
+                                Console.WriteLine($"Overview: {videogame.Overview}");
+                                Console.WriteLine($"Realise : {videogame.Release_date}");
+                                Console.WriteLine($"Id Softweare house : {videogame.Software_houseId}");
+                            }
+                            else
+                            {
+                                Console.WriteLine("No Reasult for this search ");
+                            }
+                        }
+
                         break;
                     case 3:
                         break;
